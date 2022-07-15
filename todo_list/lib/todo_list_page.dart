@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
 
 class TodoListPage extends StatefulWidget {
   const TodoListPage({Key? key}) : super(key: key);
@@ -8,15 +9,26 @@ class TodoListPage extends StatefulWidget {
 }
 
 class _TodoListPageState extends State<TodoListPage> {
-  TextEditingController _textEditingController = TextEditingController();
+  
+  late TextEditingController _textEditingController;
+
+  @override
+  void initState() {
+    _textEditingController = TextEditingController();
+    super.initState();
+  }
 
  
-
+ // @observable
   List<String> tarefas = [];
+
+  
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return Observer(
+      builder:(context) {
+        return Scaffold(
       appBar: AppBar(
         title: Text('Lista de tarefas'),
       ),
@@ -33,7 +45,7 @@ class _TodoListPageState extends State<TodoListPage> {
               height: 400, //adiciona uma restrição de tamanho ao container
               child: ListView.separated(
                 separatorBuilder: (context, index) =>
-                    Divider(), //cria uma linha
+                    Divider(),
                 itemCount: tarefas.length, //pega tamanho da lista
                 itemBuilder: (context, index) {
                   //builder tem q retornar um widge
@@ -50,7 +62,7 @@ class _TodoListPageState extends State<TodoListPage> {
           ],
         ),
       ),
-      floatingActionButton: Row(
+       floatingActionButton: Row(
         crossAxisAlignment: CrossAxisAlignment.end,
         mainAxisAlignment: MainAxisAlignment.end,
         children: [
@@ -78,6 +90,8 @@ class _TodoListPageState extends State<TodoListPage> {
           ),
         ],
       ),
+    );
+      }
     );
   }
 }
