@@ -19,14 +19,14 @@ class _TodoListPageState extends State<TodoListPage> {
   }
 
  
- // @observable
+ //@observable
   List<String> tarefas = [];
 
   
-  @override
+ @override
   Widget build(BuildContext context) {
-    return Observer(
-      builder:(context) {
+    Observer(
+      builder: (context) {
         return Scaffold(
       appBar: AppBar(
         title: Text('Lista de tarefas'),
@@ -44,23 +44,24 @@ class _TodoListPageState extends State<TodoListPage> {
               height: 400, //adiciona uma restrição de tamanho ao container
               child: ListView.separated(
                 separatorBuilder: (context, index) =>
-                    Divider(),
+                    Divider(), //cria uma linha
                 itemCount: tarefas.length, //pega tamanho da lista
                 itemBuilder: (context, index) {
                   //builder tem q retornar um widge
                   return ListTile(
                       title: Text(tarefas[index]),
                       onLongPress: () {
+                        
                           tarefas.removeAt(index);
-                      };
-                      }),
-               ), //listTile  
+                      
+                      }); //listTile
+                },
               ),
             ),
           ],
-        );
-      );
-       floatingActionButton: Row(
+        ),
+      ),
+      floatingActionButton: Row(
         crossAxisAlignment: CrossAxisAlignment.end,
         mainAxisAlignment: MainAxisAlignment.end,
         children: [
@@ -68,8 +69,9 @@ class _TodoListPageState extends State<TodoListPage> {
             backgroundColor: Colors.lime,
             onPressed: () {
               if (_textEditingController.text.length > 0) {
+                
                   tarefas.add(_textEditingController.text);
-                );
+                
                 _textEditingController.clear();
               }
             },
@@ -78,16 +80,17 @@ class _TodoListPageState extends State<TodoListPage> {
           FloatingActionButton(
             backgroundColor: Colors.lime,
             onPressed: () {
+              
                 tarefas = [];
-            },
-              );
+              
               _textEditingController.clear();
+            },
             child: Icon(Icons.remove),
           ),
         ],
       ),
     );
-     }
-    );
-  }
+   }
+   );
+  } //widget
 }
