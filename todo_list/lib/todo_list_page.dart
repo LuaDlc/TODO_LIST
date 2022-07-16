@@ -9,7 +9,7 @@ class TodoListPage extends StatefulWidget {
 }
 
 class _TodoListPageState extends State<TodoListPage> {
-  
+ // @observable
   late TextEditingController _textEditingController;
 
   @override
@@ -23,7 +23,6 @@ class _TodoListPageState extends State<TodoListPage> {
   List<String> tarefas = [];
 
   
-
   @override
   Widget build(BuildContext context) {
     return Observer(
@@ -52,16 +51,15 @@ class _TodoListPageState extends State<TodoListPage> {
                   return ListTile(
                       title: Text(tarefas[index]),
                       onLongPress: () {
-                        setState(() {
                           tarefas.removeAt(index);
-                        });
-                      }); //listTile
-                },
+                      };
+                      }),
+               ), //listTile  
               ),
             ),
           ],
-        ),
-      ),
+        );
+      );
        floatingActionButton: Row(
         crossAxisAlignment: CrossAxisAlignment.end,
         mainAxisAlignment: MainAxisAlignment.end,
@@ -70,9 +68,8 @@ class _TodoListPageState extends State<TodoListPage> {
             backgroundColor: Colors.lime,
             onPressed: () {
               if (_textEditingController.text.length > 0) {
-                setState(() {
                   tarefas.add(_textEditingController.text);
-                });
+                );
                 _textEditingController.clear();
               }
             },
@@ -81,17 +78,16 @@ class _TodoListPageState extends State<TodoListPage> {
           FloatingActionButton(
             backgroundColor: Colors.lime,
             onPressed: () {
-              setState(() {
                 tarefas = [];
-              });
-              _textEditingController.clear();
             },
+              );
+              _textEditingController.clear();
             child: Icon(Icons.remove),
           ),
         ],
       ),
     );
-      }
+     }
     );
   }
 }

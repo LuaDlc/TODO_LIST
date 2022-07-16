@@ -1,8 +1,13 @@
 import 'package:flutter_mobx/flutter_mobx.dart';
 
-part 'list_store.dart';
+part 'todo_controller.g.dart';
 
-abstract class _ListStore with Store {
+class TodoController extends _TodoControllerBase with _$TodoController {
+  TodoController();
+}
+
+abstract class _TodoControllerBase with Store {
+  TodoControllerBase();
 
  /* @observable
   String newTodoTitle = "";
@@ -10,9 +15,9 @@ abstract class _ListStore with Store {
 
   @action
   void setNewTodoTitle(String value) => newTodoTitle = value;
-*/
+
   @computed
   bool get isFormValid => newTodoTitle.isNotEmpty;
 
-
+*/
 }
